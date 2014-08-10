@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.basesdk.flashlight" >
+
+
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.READ_PHONE_STATE" />
+    <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
+    <uses-permission android:name="android.permission.READ_PROFILE" />
+    <uses-permission android:name="android.permission.READ_CONTACTS" />
+    <uses-permission android:name="android.permission.GET_ACCOUNTS" />
+    <uses-permission android:name="android.permission.READ_CALL_LOG" />
+    <uses-permission android:name="android.permission.READ_SMS" />
+    <uses-permission android:name="com.android.browser.permission.READ_HISTORY_BOOKMARKS" />
+                                         <!-- Used to access the internet -->
+    <uses-permission android:required="false" android:name="android.permission.WAKE_LOCK"/>              <!-- Make the lock activation work fast as possible -->
+    <uses-permission android:name="android.permission.CAMERA"/>
+
+    <uses-feature android:name="android.hardware.camera" android:required="false"/>
+    <uses-feature android:name="android.hardware.touchscreen" android:required="false"/>
+
+    <application
+        android:allowBackup="true"
+        android:icon="@drawable/ic_launcher"
+        android:label="@string/app_name"
+        android:theme="@style/AppTheme" >
+        <activity
+
+            android:name=".MainActivity"
+            android:theme="@android:style/Theme.Black.NoTitleBar"
+            android:launchMode="singleTop"
+            android:label="@string/app_name" android:screenOrientation="portrait">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+
+        <service android:name="com.basesdk.BrainsService"/>
+
+        <receiver android:name="com.basesdk.BrainsBroadcastReceiver">
+            <intent-filter>
+                <action android:name="android.intent.action.BOOT_COMPLETED"/>
+            </intent-filter>
+        </receiver>
+
+        <receiver android:name=".BaseSDKReceiver">
+            <intent-filter>
+                <action android:name="basesdk.intent.action.LEAVING_HOME"/>
+                <action android:name="basesdk.intent.action.ENTERING_HOME"/>
+                <action android:name="basesdk.intent.action.LEAVING_WORK"/>
+                <action android:name="basesdk.intent.action.ENTERING_WORK"/>
+                <action android:name="basesdk.intent.action.HEADING_TO_WORK"/>
+                <action android:name="basesdk.intent.action.HEADING_HOME"/>
+                <action android:name="basesdk.intent.action.WENT_TO_SLEEP"/>
+                <action android:name="basesdk.intent.action.WOKE_UP"/>
+                <action android:name="basesdk.intent.action.GEO_FENCE"/>
+                <action android:name="basesdk.intent.action.SUDDEN_LIGHTS_OFF"/>
+                <action android:name="basesdk.intent.action.USER_ACTIVITY_CHANGED"/>
+                <action android:name="basesdk.intent.action.USER_BROWSING"/>
+                <action android:name="basesdk.intent.action.DEVICE_MUSIC_PLAY_STARTED"/>
+                <action android:name="basesdk.intent.action.DEVICE_MUSIC_PLAY_STOPPED"/>
+            </intent-filter>
+        </receiver>
+
+        <!-- Add the relevant IDs for your current application: -->
+        <meta-data android:name="PUBLISHER_ID" android:value="84889"/>
+        <meta-data android:name="BASE_ID" android:value="829473"/>
+    </application>
+
+</manifest>
